@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gramipasto_mobileapp/services/GramineaService.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+
+  final GramineaService gramineaService;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
@@ -35,8 +39,13 @@ class HomeScreen extends StatelessWidget {
                   child: Text("Gramipasto"),
                 )),
           ),
-          Row(
-            children: <Widget>[],
+          Container(
+            width: constraints.maxWidth,
+            height: 30,
+          ),
+          FutureBuilder(
+            future: ,
+            builder: builder
           )
         ],
       );
