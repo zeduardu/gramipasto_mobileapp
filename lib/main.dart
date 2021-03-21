@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gramipasto_mobileapp/models/Graminea.dart';
 import 'package:gramipasto_mobileapp/services/GramineaService.dart';
+import 'package:gramipasto_mobileapp/widgets/GramineaListWidget.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,8 +23,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-
-  final GramineaService gramineaService;
+  final gramineaService = GramineaService();
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +44,14 @@ class HomeScreen extends StatelessWidget {
             width: constraints.maxWidth,
             height: 30,
           ),
-          FutureBuilder(
-            future: ,
-            builder: builder
-          )
+          FutureBuilder<List<Graminea>>(
+              future: gramineaService.fetchGramineas(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) print(snapshot.error);
+                return snapshot.hasData
+                    ? GramineaListWidget(gramineas: snapshot.data)
+                    : Center(child: CircularProgressIndicator());
+              })
         ],
       );
     }));

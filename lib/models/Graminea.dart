@@ -26,16 +26,16 @@ class Graminea {
   });
 
   Graminea copyWith({
-    int? id,
-    String? nomeCientifico,
-    String? nomeComum,
-    String? genero,
-    String? origem,
-    int? exigenciaFertilidade,
-    int? precipiticaoMinima,
-    bool? toleranciaAlagamento,
-    int? toleranciaSeca,
-    int? toleranciaFrio,
+    int id,
+    String nomeCientifico,
+    String nomeComum,
+    String genero,
+    String origem,
+    int exigenciaFertilidade,
+    int precipiticaoMinima,
+    bool toleranciaAlagamento,
+    int toleranciaSeca,
+    int toleranciaFrio,
   }) {
     return Graminea(
       id: id ?? this.id,
