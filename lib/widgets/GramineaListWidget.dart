@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gramipasto_mobileapp/models/Graminea.dart';
+import 'package:gramipasto_mobileapp/modules/graminea/models/Graminea.dart';
 
 class GramineaListWidget extends StatelessWidget {
   final List<Graminea> gramineas;
@@ -8,19 +8,22 @@ class GramineaListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[],) GridView.builder(
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      //shrinkWrap: true,
       itemCount: gramineas.length,
       itemBuilder: (context, index) {
-        return Container(
-          child: Text(
-            gramineas[index].nomeComum,
-            style: TextStyle(color: Colors.black),
+        return Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.album),
+                title: Text(gramineas[index].nomeComum),
+                subtitle: Text(gramineas[index].nomeCientifico),
+              )
+            ],
           ),
-          height: 200,
-          width: 200,
-          color: Colors.blueAccent,
         );
       },
     );

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:gramipasto_mobileapp/models/Graminea.dart';
+import 'package:gramipasto_mobileapp/modules/graminea/models/Graminea.dart';
 import 'package:http/http.dart' as http;
 
 List<Graminea> parseGramineas(String responseBody) {
