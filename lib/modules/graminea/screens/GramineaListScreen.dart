@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:gramipasto_mobileapp/modules/graminea/models/Graminea.dart';
 import 'package:gramipasto_mobileapp/services/GramineaService.dart';
-import 'package:gramipasto_mobileapp/widgets/GramineaListWidget.dart';
+import 'package:gramipasto_mobileapp/modules/graminea/widget/GramineaListWidget.dart';
 
 class GramineaMenuScreen extends StatelessWidget {
   final gramineaService = GramineaService();

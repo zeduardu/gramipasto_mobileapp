@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:gramipasto_mobileapp/modules/graminea/screens/GramineaSearchScreen.dart';
 import 'package:gramipasto_mobileapp/modules/graminea/widget/GramineaMenuButton.dart';
+import 'package:gramipasto_mobileapp/services/GramineaService.dart';
 import 'package:gramipasto_mobileapp/widgets/WaveHeadWidget.dart';
+import 'package:gramipasto_mobileapp/utils/ui/appDialogs.dart';
 
 class GramineaMenuScreen extends StatelessWidget {
+  final gramineaService = GramineaService();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,32 +24,31 @@ class GramineaMenuScreen extends StatelessWidget {
             children: <Widget>[
               GramineaMenuButton(
                 icon: Icons.search,
-                text: 'Pesquisar gramíne',
+                text: 'Pesquisar gramínea',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GramineaSearchScreen(),
+                      ));
+                },
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Heed not the rabble'),
-                color: Colors.teal[200],
+              GramineaMenuButton(
+                icon: Icons.list,
+                text: 'Listar gramíneas',
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Sound of screams but the'),
-                color: Colors.teal[300],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Who scream'),
-                color: Colors.teal[400],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Revolution is coming...'),
-                color: Colors.teal[500],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Revolution, they...'),
-                color: Colors.teal[600],
+              GramineaMenuButton(
+                icon: Icons.update,
+                text: 'Atualizar lista de gramíneas',
+                onPressed: () {
+                  try {
+                    gramineaService.updateJsonFile();
+                    showInformationDialog(
+                        context, 'Informação', 'Deu tudo certo!');
+                  } catch (e) {
+                    showInformationDialog(context, 'Erro', e.toString());
+                  }
+                },
               ),
             ],
           ),

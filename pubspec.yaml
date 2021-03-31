@@ -32,6 +32,9 @@ dependencies:
   # Flutter package that provides you custom clippers to help you achieve various custom shapes.
   flutter_custom_clippers: ^1.1.2
 
+  # A Flutter plugin for finding commonly used locations on the filesystem.
+  path_provider: ^2.0.1
+
   # The http package makes it easier to perform network requests, such as fetching data from a JSON endpoint.
   http: ^0.13.0
 
@@ -60,6 +63,8 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+  assets:
+    - assets/img/logo_marca.png
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
