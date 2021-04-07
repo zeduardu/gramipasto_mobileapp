@@ -13,6 +13,16 @@ List<Graminea> parseGramineas(String responseBody) {
 class GramineaService {
   final gramineaStorage = GramineaStorage();
 
+  Future<void> updateJsonFile() async {
+    final response = await http
+        .get(Uri.parse('https://gramipasto-api.herokuapp.com/graminea/browse'));
+    if (response.statusCode == 200) {
+      gramineaStorage.writeJson(response.body);
+    } else {
+      throw Exception('Falha ao carregar os dados da API.');
+    }
+  }
+
   Future<List<Graminea>> fetchGramineas() async {
     gramineaStorage.exitsJsonFile().then((value) => {
           if (value)
@@ -34,13 +44,10 @@ class GramineaService {
     }
   }
 
-  Future<void> updateJsonFile() async {
-    final response = await http
-        .get(Uri.parse('https://gramipasto-api.herokuapp.com/graminea/browse'));
-    if (response.statusCode == 200) {
-      gramineaStorage.writeJson(response.body);
-    } else {
-      throw Exception('Falha ao carregar os dados da API.');
-    }
+  // Acrônimo BREAD (Browse, Read, Edit, Add, Delete)
+  Future<List<String>> browseGraminea() async {
+
+    return null;
   }
+
 }
