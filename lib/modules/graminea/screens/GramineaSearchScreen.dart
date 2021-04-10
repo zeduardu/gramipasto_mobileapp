@@ -7,7 +7,6 @@ class GramineaSearchScreen extends StatefulWidget {
 }
 
 class _GramineaSearchScreenState extends State<GramineaSearchScreen> {
-  final formKey = GlobalKey<FormState>();
   // Recuperar o valor da pesquisa pelo dado da gramínea
   final searchTextController = TextEditingController();
 
@@ -21,23 +20,29 @@ class _GramineaSearchScreenState extends State<GramineaSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Pesquisar gramíneas"),
-        backgroundColor: Color.fromRGBO(18, 154, 200, 1),
-      ),
-      body: Form(
-        key: formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              controller: searchTextController,
-              onChanged: (value) {
-                print(value);
-              },
-            ),
-          ],
+        appBar: AppBar(
+          title: Text("Pesquisa de gramínea"),
+          backgroundColor: Color.fromRGBO(18, 154, 200, 1),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: TextField(
+                  controller: searchTextController,
+                  onChanged: (value) {
+                    print(searchTextController.text);
+                  },
+                  decoration: InputDecoration(
+                      labelText: 'Termo de busca:',
+                      border: OutlineInputBorder(),
+                      suffixIcon: Icon(Icons.filter_alt)),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
