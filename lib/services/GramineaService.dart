@@ -45,9 +45,16 @@ class GramineaService {
   }
 
   // Acrônimo BREAD (Browse, Read, Edit, Add, Delete)
-  Future<List<String>> browseGraminea() async {
-
-    return null;
+  Future<List<Graminea>> browseGramineas() async {
+    return fetchGramineas();
   }
 
+  // Future<List<Graminea>> browseGramineasByFilter(String nomeComum) async {
+  //   var x = await fetchGramineas().then((value) => {
+  //         value
+  //             .where((element) => element.nomeComum.startsWith(nomeComum))
+  //             .toList()
+  //       });
+  //   return x.
+  // }
 }
