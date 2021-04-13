@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class GramineaMenuButton extends StatelessWidget {
   final IconData icon;
   final String text;
-  void Function() onPressed;
+  final void Function() onPressed;
 
   GramineaMenuButton({Key key, this.icon, this.text, this.onPressed})
       : super(key: key);

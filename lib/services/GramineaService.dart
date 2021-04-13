@@ -49,12 +49,12 @@ class GramineaService {
     return fetchGramineas();
   }
 
-  // Future<List<Graminea>> browseGramineasByFilter(String nomeComum) async {
-  //   var x = await fetchGramineas().then((value) => {
-  //         value
-  //             .where((element) => element.nomeComum.startsWith(nomeComum))
-  //             .toList()
-  //       });
-  //   return x.
-  // }
+  Future<List<Graminea>> browseGramineasByFilter(String nomeComum) async {
+    var x = await fetchGramineas().then((value) => {
+          value
+              .where((element) => element.nomeComum.startsWith(nomeComum))
+              .toList()
+        });
+    return null;
+  }
 }

@@ -14,19 +14,21 @@ class _GramineaSearchScreenState extends State<GramineaSearchScreen> {
   // Instânica para acesso aos serviços de graminea
   final gramineaService = GramineaService();
   // Armazenar a lista de gramíneas no estilo datasource
-  Future<List<Graminea>> futureListGramineas;
+  Future<List<Graminea>> futureGramineasList;
+  // Lista com filtro das gramíneas
+  Future<List<Graminea>> filteredGramineasList;
 
   @override
   void initState() {
     super.initState();
-    futureListGramineas = gramineaService.fetchGramineas();
+    futureGramineasList = gramineaService.fetchGramineas();
   }
 
   @override
   void dispose() {
+    super.dispose();
     // Zerar os dados pesquisados ou qualquer resquício de busca feita
     searchTextController.dispose();
-    super.dispose();
   }
 
   @override
@@ -53,12 +55,16 @@ class _GramineaSearchScreenState extends State<GramineaSearchScreen> {
             Container(
               child: ElevatedButton(
                 child: Text('Pesquisar'),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+
+                  });
+                },
               ),
             ),
             Expanded(
               child: FutureBuilder<List<Graminea>>(
-                future: this.futureListGramineas,
+                future: this.filteredGramineasList,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
@@ -66,6 +72,10 @@ class _GramineaSearchScreenState extends State<GramineaSearchScreen> {
                       itemBuilder: (context, index) {
                         return Text(snapshot.data[index].nomeComum);
                       },
+                    );
+                  } else if (!snapshot.hasData) {
+                    return Center (
+                      child: Text('Necessário iniciar informar algum termo para busca.'),
                     );
                   } else if (snapshot.hasError) {
                     return Center(
