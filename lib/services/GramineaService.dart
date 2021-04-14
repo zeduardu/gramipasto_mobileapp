@@ -14,8 +14,7 @@ class GramineaService {
   final gramineaStorage = GramineaStorage();
 
   Future<void> updateJsonFile() async {
-    final response = await http
-        .get(Uri.parse('https://gramipasto-api.herokuapp.com/graminea/browse'));
+    final response = await http.get(Uri.parse('https://gramipasto-api.herokuapp.com/graminea/browse'));
     if (response.statusCode == 200) {
       gramineaStorage.writeJson(response.body);
     } else {
@@ -24,19 +23,15 @@ class GramineaService {
   }
 
   Future<List<Graminea>> fetchGramineas() async {
-    gramineaStorage.exitsJsonFile().then((value) => {
-          if (value)
-            {
-              gramineaStorage
-                  .readJson()
-                  .then((value) => {compute(parseGramineas, value)})
-            }
-          else
-            {updateJsonFile()}
-        });
+    var existFile = await gramineaStorage.exitsJsonFile();
 
-    final response = await http
-        .get(Uri.parse('https://gramipasto-api.herokuapp.com/graminea/browse'));
+    if (existFile) {
+      gramineaStorage.readJson().then((value) => {compute(parseGramineas, value)});
+    } else {
+      updateJsonFile();
+    }
+
+    final response = await http.get(Uri.parse('https://gramipasto-api.herokuapp.com/graminea/browse'));
     if (response.statusCode == 200) {
       return compute(parseGramineas, response.body);
     } else {
@@ -45,16 +40,7 @@ class GramineaService {
   }
 
   // Acrônimo BREAD (Browse, Read, Edit, Add, Delete)
-  Future<List<Graminea>> browseGramineas() async {
-    return fetchGramineas();
-  }
-
-  Future<List<Graminea>> browseGramineasByFilter(String nomeComum) async {
-    var x = await fetchGramineas().then((value) => {
-          value
-              .where((element) => element.nomeComum.startsWith(nomeComum))
-              .toList()
-        });
-    return null;
+  List<Graminea> browseGramineasByFilter(List<Graminea> data, String searchTerm) {
+    return data.where((element) => element.nomeComum.toLowerCase().contains(searchTerm)).toList();
   }
 }

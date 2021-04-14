@@ -10,25 +10,26 @@ class GramineaSearchScreen extends StatefulWidget {
 
 class _GramineaSearchScreenState extends State<GramineaSearchScreen> {
   // Recuperar o valor da pesquisa pelo dado da gramínea
-  final searchTextController = TextEditingController();
+  final textEditingController = TextEditingController();
   // Instânica para acesso aos serviços de graminea
   final gramineaService = GramineaService();
-  // Armazenar a lista de gramíneas no estilo datasource
+  // O termo desejado para busca
+  String searchTerm;
+  // Datasource para lista de grmineas
   Future<List<Graminea>> futureGramineasList;
-  // Lista com filtro das gramíneas
-  Future<List<Graminea>> filteredGramineasList;
 
   @override
   void initState() {
     super.initState();
     futureGramineasList = gramineaService.fetchGramineas();
+    searchTerm = "";
   }
 
   @override
   void dispose() {
     super.dispose();
     // Zerar os dados pesquisados ou qualquer resquício de busca feita
-    searchTextController.dispose();
+    textEditingController.dispose();
   }
 
   @override
@@ -41,51 +42,69 @@ class _GramineaSearchScreenState extends State<GramineaSearchScreen> {
         body: Column(
           children: <Widget>[
             Container(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  controller: searchTextController,
-                  decoration: InputDecoration(
-                      labelText: 'Termo de busca:',
-                      border: OutlineInputBorder(),
-                      suffixIcon: Icon(Icons.filter_alt)),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: textEditingController,
+                    decoration: InputDecoration(labelText: 'Termo de busca:', border: OutlineInputBorder(), suffixIcon: Icon(Icons.filter_alt)),
+                    onChanged: (value) {
+                      setState(() {
+                        searchTerm = value;
+                      });
+                    },
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              child: ElevatedButton(
-                child: Text('Pesquisar'),
-                onPressed: () {
-                  setState(() {
-
-                  });
-                },
-              ),
-            ),
+                margin: EdgeInsets.only(bottom: 10)),
+            // Container(
+            //   child: ElevatedButton(
+            //     child: Text('Pesquisar'),
+            //     onPressed: () {
+            //       setState(() {
+            //         this.searchTerm = textEditingController.text;
+            //       });
+            //     },
+            //   ),
+            // ),
             Expanded(
-              child: FutureBuilder<List<Graminea>>(
-                future: this.filteredGramineasList,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return Text(snapshot.data[index].nomeComum);
-                      },
-                    );
-                  } else if (!snapshot.hasData) {
-                    return Center (
-                      child: Text('Necessário iniciar informar algum termo para busca.'),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text(snapshot.error.toString()),
-                    );
-                  }
-                  return Center(child: CircularProgressIndicator());
-                },
-              ),
-            ),
+                child: FutureBuilder<List<Graminea>>(
+                    future: futureGramineasList,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List<Graminea> gramineasList = gramineaService.browseGramineasByFilter(snapshot.data, searchTerm);
+                        return ListView.builder(
+                          itemCount: gramineasList.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          gramineasList[index].nomeComum,
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(gramineasList[index].nomeCientifico)
+                                      ],
+                                    ),
+                                    ElevatedButton(
+                                      child: Text('Ver'),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return Center(
+                          child: Text('Digite o termo desejado.'),
+                        );
+                      }
+                    })),
           ],
         ));
   }

@@ -30,8 +30,9 @@ class GramineaStorage {
     }
   }
 
-  Future<bool> exitsJsonFile() {
-    final path = _localPath;
-    return io.File('$path/$jsonFileName').exists();
+  Future<bool> exitsJsonFile() async {
+    final path = await _localPath;
+    var gramineasFile = io.File('$path/$jsonFileName');
+    return gramineasFile.exists();
   }
 }
