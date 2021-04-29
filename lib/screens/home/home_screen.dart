@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gramipasto_mobileapp/modules/graminea/screens/GramineaSearchScreen.dart';
-import 'package:gramipasto_mobileapp/modules/graminea/widget/GramineaMenuButton.dart';
-import 'package:gramipasto_mobileapp/services/GramineaService.dart';
-import 'package:gramipasto_mobileapp/widgets/WaveHeadWidget.dart';
-import 'package:gramipasto_mobileapp/utils/ui/appDialogs.dart';
+import 'package:gramipasto_mobileapp/controllers/GramineaController.dart';
+import 'package:gramipasto_mobileapp/screens/home/widgets/screen_button/screen_button_widget.dart';
+import 'package:gramipasto_mobileapp/screens/search/search_screen.dart';
+import 'package:gramipasto_mobileapp/utils/ui/app_dialogs.dart';
 
-class GramineaMenuScreen extends StatelessWidget {
-  final gramineaService = GramineaService();
+class HomeScreen extends StatelessWidget {
+  final controller = GramineaController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        WaveHeadWidget(),
         Expanded(
           child: GridView.count(
             primary: false,
@@ -22,27 +20,27 @@ class GramineaMenuScreen extends StatelessWidget {
             mainAxisSpacing: 10,
             crossAxisCount: 2,
             children: <Widget>[
-              GramineaMenuButton(
+              ScreenButtonWidget(
                 icon: Icons.search,
                 text: 'Pesquisar gramínea',
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => GramineaSearchScreen(),
+                        builder: (context) => SearchScreen(),
                       ));
                 },
               ),
-              GramineaMenuButton(
+              ScreenButtonWidget(
                 icon: Icons.list,
-                text: 'Listar gramíneas',
+                text: 'Cálculo...',
               ),
-              GramineaMenuButton(
+              ScreenButtonWidget(
                 icon: Icons.update,
                 text: 'Atualizar lista de gramíneas',
                 onPressed: () {
                   try {
-                    gramineaService.updateJsonFile();
+                    controller.upateGramineaListFile();
                     showInformationDialog(
                         context, 'Informação', 'Deu tudo certo!');
                   } catch (e) {

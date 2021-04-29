@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class GramineaMenuButton extends StatelessWidget {
+class ScreenButtonWidget extends StatelessWidget {
   final IconData icon;
   final String text;
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
-  GramineaMenuButton({Key key, this.icon, this.text, this.onPressed})
+  ScreenButtonWidget({Key? key, required this.icon, required this.text, this.onPressed})
       : super(key: key);
 
   @override
