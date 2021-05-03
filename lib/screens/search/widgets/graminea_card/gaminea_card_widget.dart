@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gramipasto_mobileapp/core/core.dart';
+import 'package:gramipasto_mobileapp/screens/graminea/graminea_screen.dart';
 
 class GramineaCardWidget extends StatelessWidget {
   final String commonName;
   final String scientificName;
+  final int id;
 
   GramineaCardWidget(
-      {Key? key, required this.commonName, required this.scientificName})
+      {Key? key,
+      required this.commonName,
+      required this.scientificName,
+      required this.id})
       : super(key: key);
 
   @override
@@ -60,7 +65,15 @@ class GramineaCardWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 child: Text('Ver'),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GramineaScreen(
+                          id: this.id,
+                        ),
+                      ));
+                },
               ),
             ],
           ),

@@ -52,6 +52,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     scientificName: controller
                         .getGramineasBySearchTerm(this.searchTerm)[index]
                         .nomeCientifico,
+                    id: controller
+                        .getGramineasBySearchTerm(this.searchTerm)[index]
+                        .id,
                   );
                 },
               ),
