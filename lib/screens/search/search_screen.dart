@@ -46,12 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     controller.getGramineasBySearchTerm(this.searchTerm).length,
                 itemBuilder: (context, index) {
                   return GramineaCardWidget(
-                    commonName: controller
-                        .getGramineasBySearchTerm(this.searchTerm)[index]
-                        .nomeComum,
-                    scientificName: controller
-                        .getGramineasBySearchTerm(this.searchTerm)[index]
-                        .nomeCientifico,
+                    graminea: controller.gramineas![index],
                   );
                 },
               ),

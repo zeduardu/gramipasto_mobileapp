@@ -5,15 +5,21 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   static final TextStyle title = GoogleFonts.notoSans(
-    color: AppColors.white,
+    color: AppColors.black,
     fontSize: 20,
     fontWeight: FontWeight.w400,
   );
 
   static final TextStyle titleBold = GoogleFonts.notoSans(
-    color: AppColors.white,
+    color: AppColors.black,
     fontSize: 20,
     fontWeight: FontWeight.w600,
+  );
+
+    static final TextStyle subTitle = GoogleFonts.notoSans(
+    color: AppColors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
   );
 
   static final TextStyle heading = GoogleFonts.notoSans(
@@ -66,6 +72,11 @@ class AppTextStyles {
   static final TextStyle body20 = GoogleFonts.notoSans(
     color: AppColors.grey,
     fontSize: 20,
+    fontWeight: FontWeight.normal,
+  );
+  static final TextStyle body15 = GoogleFonts.notoSans(
+    color: AppColors.grey,
+    fontSize: 15,
     fontWeight: FontWeight.normal,
   );
   static final TextStyle bodyLightGrey20 = GoogleFonts.notoSans(

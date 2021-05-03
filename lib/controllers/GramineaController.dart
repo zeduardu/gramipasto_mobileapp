@@ -8,6 +8,7 @@ class GramineaController {
   final repository = GramineaService();
   List<Graminea>? gramineas;
   String? messageError;
+  Graminea? graminea;
 
   set state(AppState state) => stateNotifier.value = state;
   AppState get state => stateNotifier.value;
@@ -27,10 +28,28 @@ class GramineaController {
   }
 
   List<Graminea> getGramineasBySearchTerm(String commonName) {
-    return gramineas!.where((element) => element.nomeComum.toLowerCase().contains(commonName)).toList();
+    return gramineas!
+        .where(
+            (element) => element.nomeComum.toLowerCase().contains(commonName))
+        .toList();
+  }
+
+  Graminea readById(int id) {
+    return gramineas!.firstWhere((element) => element.id == id);
   }
 
   void upateGramineaListFile() {
     repository.updateJsonFile();
+  }
+
+  String getLevel(int value) {
+    switch (value) {
+      case 0:
+        return "Baixa";
+      case 1:
+        return "Média";
+      default:
+        return "Alta";
+    }
   }
 }
