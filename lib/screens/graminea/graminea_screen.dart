@@ -18,9 +18,7 @@ class GramineaScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GramineaImageWidget(),
-          Expanded(
-            child: GramineaDetailsWidget(graminea: this.graminea),
-          ),
+          GramineaDetailsWidget(graminea: this.graminea),
         ],
       ),
     );

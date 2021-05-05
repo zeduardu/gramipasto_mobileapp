@@ -1,57 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:gramipasto_mobileapp/controllers/GramineaController.dart';
 import 'package:gramipasto_mobileapp/screens/home/widgets/screen_button/screen_button_widget.dart';
 import 'package:gramipasto_mobileapp/screens/search/search_screen.dart';
-import 'package:gramipasto_mobileapp/utils/ui/app_dialogs.dart';
 
 class HomeScreen extends StatelessWidget {
-  final controller = GramineaController();
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: GridView.count(
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 2,
-            children: <Widget>[
-              ScreenButtonWidget(
-                icon: Icons.search,
-                text: 'Pesquisar gramínea',
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SearchScreen(),
-                      ));
-                },
-              ),
-              ScreenButtonWidget(
-                icon: Icons.list,
-                text: 'Cálculo...',
-              ),
-              ScreenButtonWidget(
-                icon: Icons.update,
-                text: 'Atualizar lista de gramíneas',
-                onPressed: () {
-                  try {
-                    controller.upateGramineaListFile();
-                    showInformationDialog(
-                        context, 'Informação', 'Deu tudo certo!');
-                  } catch (e) {
-                    showInformationDialog(context, 'Erro', e.toString());
-                  }
-                },
-              ),
-            ],
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Image.asset(
+            "assets/images/background.jpg",
+            height: MediaQuery.of(context).size.height,
+            fit: BoxFit.cover,
           ),
-        ),
-      ],
+          Align(
+            alignment: Alignment(0, -0.50),
+            child: Image.asset("assets/images/marca.png"),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ScreenButtonWidget.white(
+                  label: 'Pesquisar',
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ScreenButtonWidget.viking(
+                  label: 'Atualizar',
+                  onTap: () {},
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

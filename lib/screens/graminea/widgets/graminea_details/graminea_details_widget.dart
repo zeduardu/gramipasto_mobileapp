@@ -25,7 +25,7 @@ class GramineaDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+      padding: const EdgeInsets.only(right: 30, left: 30, top: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,76 +38,74 @@ class GramineaDetailsWidget extends StatelessWidget {
             style: AppTextStyles.subTitle,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Row(
-              children: [
-                MiniCardWidget(value: this.graminea.origem),
-                MiniCardWidget(value: this.graminea.genero),
-                MiniCardWidget(
-                    value: this.graminea.precipiticaoMinima.toString() +
-                        ' mm'),
-              ],
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  MiniCardWidget(value: this.graminea.origem),
+                  MiniCardWidget(value: this.graminea.genero),
+                  MiniCardWidget(value: '${this.graminea.precipiticaoMinima} mm'),
+                ],
+              ),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Exigência de fertilidade:',
-                      style: AppTextStyles.heading15,
-                    ),
-                    Text(
-                      this._exigenciaFertilidade,
-                      style: AppTextStyles.body15,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Tolerância ao alagamento:',
-                      style: AppTextStyles.heading15,
-                    ),
-                    Text(
-                      this._toleranciaAlagamento,
-                      style: AppTextStyles.body15,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Tolerância a seca:',
-                      style: AppTextStyles.heading15,
-                    ),
-                    Text(
-                      this._toleranciaSeca,
-                      style: AppTextStyles.body15,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Tolerância ao frio:',
-                      style: AppTextStyles.heading15,
-                    ),
-                    Text(
-                      this._toleranciaFrio,
-                      style: AppTextStyles.body15,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Exigência de fertilidade:',
+                    style: AppTextStyles.heading15,
+                  ),
+                  Text(
+                    this._exigenciaFertilidade,
+                    style: AppTextStyles.body15,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Tolerância ao alagamento:',
+                    style: AppTextStyles.heading15,
+                  ),
+                  Text(
+                    this._toleranciaAlagamento,
+                    style: AppTextStyles.body15,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Tolerância a seca:',
+                    style: AppTextStyles.heading15,
+                  ),
+                  Text(
+                    this._toleranciaSeca,
+                    style: AppTextStyles.body15,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Tolerância ao frio:',
+                    style: AppTextStyles.heading15,
+                  ),
+                  Text(
+                    this._toleranciaFrio,
+                    style: AppTextStyles.body15,
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
